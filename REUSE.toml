@@ -17,3 +17,11 @@ path = [
 ]
 SPDX-FileCopyrightText = '2026 林博仁(Buo-ren Lin) <buo.ren.lin@gmail.com>'
 SPDX-License-Identifier = 'BSD-2-Clause'
+
+[[annotations]]
+path = [
+    "password-auth-test-credentials.md",
+    "qrc-auth-test-credentials.md"
+]
+SPDX-FileCopyrightText = '2026 林博仁(Buo-ren Lin) <buo.ren.lin@gmail.com>'
+SPDX-License-Identifier = 'BSD-2-Clause'

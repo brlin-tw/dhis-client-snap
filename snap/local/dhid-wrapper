@@ -1,0 +1,26 @@
+#!/bin/sh
+# Wrapper script for the dhid daemon to adapt paths to the snap
+# environment
+#
+# Copyright 2026 林博仁(Buo-ren Lin) <buo.ren.lin@gmail.com>
+# SPDX-License-Identifier: BSD-2-Clause
+
+config_file="${SNAP_COMMON}/dhid.conf"
+pid_file="${SNAP_DATA}/dhid.pid"
+
+if ! test -e "${config_file}"; then
+    echo "Error: Configuration file ${config_file} not found." >&2
+    echo "Please create it with your DHIS provider credentials." >&2
+    echo "A sample configuration is available at:" >&2
+    echo "  ${SNAP}/usr/local/share/dhis-client/dhid.conf.sample" >&2
+    echo "You can copy it using:" >&2
+    echo "  sudo cp ${SNAP}/usr/local/share/dhis-client/dhid.conf.sample ${config_file}" >&2
+    echo "  sudo chmod 600 ${config_file}" >&2
+    echo "Then edit it with your DHIS credentials and restart the service:" >&2
+    echo "  sudo snap restart dhis-client" >&2
+    exit 1
+fi
+
+exec "${SNAP}/usr/local/bin/dhid" \
+    -f "${config_file}" \
+    -P "${pid_file}"

@@ -1,0 +1,16 @@
+#!/bin/sh
+# Install hook for the dhis-client snap
+# Copies the sample configuration file to SNAP_COMMON on first install
+#
+# Copyright 2026 林博仁(Buo-ren Lin) <buo.ren.lin@gmail.com>
+# SPDX-License-Identifier: BSD-2-Clause
+
+config_file="${SNAP_COMMON}/dhid.conf"
+sample_config="${SNAP}/usr/local/share/dhis-client/dhid.conf.sample"
+
+if ! test -e "${config_file}"; then
+    if test -e "${sample_config}"; then
+        cp "${sample_config}" "${config_file}"
+        chmod 600 "${config_file}"
+    fi
+fi

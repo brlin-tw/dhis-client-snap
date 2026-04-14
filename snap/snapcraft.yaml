@@ -15,6 +15,11 @@ description: |
   Work items · Unofficial snap packaging for R5 DHIS Client · GitLab
   https://gitlab.com/brlin/dhis-client-snap/-/work_items
 
+website: https://dhis.org
+contact: https://gitlab.com/brlin/dhis-client-snap/-/work_items
+issues: https://gitlab.com/brlin/dhis-client-snap/-/work_items
+source-code: https://gitlab.com/brlin/dhis-client-snap
+license: BSD-2-Clause
 grade: stable
 confinement: strict
 
@@ -30,10 +35,24 @@ parts:
       - gcc
       - libgmp-dev
       - make
+    stage-packages:
+      - libgmp10
+    override-build: |
+      make
+      install -D dhid "${CRAFT_PART_INSTALL}/usr/local/bin/dhid"
+      install -D genkeys "${CRAFT_PART_INSTALL}/usr/local/bin/dhid-genkeys"
+      install -Dm644 dhid.conf.sample "${CRAFT_PART_INSTALL}/usr/local/share/dhis-client/dhid.conf.sample"
+
+  local-files:
+    source: snap/local
+    plugin: dump
+    organize:
+      dhid-wrapper: usr/local/bin/dhid-wrapper
 
 apps:
   dhis-client:
-    command: usr/local/bin/dhid
-    daemon: simple
+    command: usr/local/bin/dhid-wrapper
+    daemon: forking
     plugs:
       - network
+      - network-bind

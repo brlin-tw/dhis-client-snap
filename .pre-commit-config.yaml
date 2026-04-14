@@ -42,6 +42,7 @@ repos:
     rev: v0.34.0
     hooks:
       - id: markdownlint
+        exclude: '^(password-auth|qrc-auth)-test-credentials\.md$'
 
   # Check REUSE compliance
   # https://reuse.software/
