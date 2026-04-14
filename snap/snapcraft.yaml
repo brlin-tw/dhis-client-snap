@@ -20,7 +20,11 @@ confinement: strict
 
 parts:
   dhis-client:
-    source: ftp://ftp.dhis.org/pub/dhis/dhid-5.5.tar.gz
+    source: dhid-5.5.tar.gz
+    # Not supported yet
+    # Support download part source from FTP URLs · Issue #1546 · canonical/craft-parts
+    # https://github.com/canonical/craft-parts/issues/1546
+    #source: ftp://ftp.dhis.org/pub/dhis/dhid-5.5.tar.gz
     plugin: make
     build-packages:
       - gcc
@@ -30,5 +34,6 @@ parts:
 apps:
   dhis-client:
     command: usr/local/bin/dhid
+    daemon: simple
     plugs:
       - network
