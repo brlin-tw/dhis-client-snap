@@ -1,0 +1,34 @@
+# Snapcraft project file for the R5 DHIS Client software
+#
+# Copyright 2026 林博仁(Buo-ren Lin) <buo.ren.lin@gmail.com>
+# SPDX-License-Identifier: BSD-2-Clause
+name: dhis-client
+title: R5 DHIS Client (UNOFFICIAL)
+base: core24
+version: '5.5'
+summary: Dynamic Host Information System - client
+description: |
+  dhid is the DHIS client daemon. After setting up with a DHIS provider, each machine may run a dhid daemon (in background) in order to update its dynamic IP address within the server.
+
+  This is NOT an official distribution of the R5 DHIS Client software, please refer to the snap's own issue tracker for support:
+
+  Work items · Unofficial snap packaging for R5 DHIS Client · GitLab
+  https://gitlab.com/brlin/dhis-client-snap/-/work_items
+
+grade: stable
+confinement: strict
+
+parts:
+  dhis-client:
+    source: ftp://ftp.dhis.org/pub/dhis/dhid-5.5.tar.gz
+    plugin: make
+    build-packages:
+      - gcc
+      - libgmp-dev
+      - make
+
+apps:
+  dhis-client:
+    command: usr/local/bin/dhid
+    plugs:
+      - network
