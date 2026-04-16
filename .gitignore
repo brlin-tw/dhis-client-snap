@@ -95,6 +95,9 @@
 # Don't track unpacked product files
 /project-name-*/
 
+# Don't track auth test credentials
+/*-auth-test-credentials.md
+
 # Don't track built snap packages
 *.snap
 
